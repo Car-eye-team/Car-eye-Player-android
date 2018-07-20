@@ -7,7 +7,7 @@ car-eye 播放器系列
 Car-eye-player for windows：      
  https://github.com/Car-eye-team/Car-eye-push-windows
 
-car-eye-player for IOS：
+car-eye-player for IOS：       
 https://github.com/Car-eye-team/Car-eye-player-IOS
 
 # 软件下载
