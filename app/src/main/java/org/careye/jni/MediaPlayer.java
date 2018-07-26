@@ -5,12 +5,14 @@
  */
 package org.careye.jni;
 
+import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.graphics.SurfaceTexture;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 public final class MediaPlayer
 {
@@ -33,18 +35,24 @@ public final class MediaPlayer
     public MediaPlayer() {
     }
 
-    public MediaPlayer(String url, Handler h, String params) {
+    public MediaPlayer(Context context, String url, Handler h, String params) {
         mPlayerMsgHandler = h;
-        open(url, params);
+        open(context, url, params);
     }
 
     protected void finalize() {
         close();
     }
 
-    public boolean open(String url, String params) {
+    public boolean open(Context context, String url, String params) {
         nativeClose(m_hPlayer);
-        m_hPlayer = nativeOpen(url, null, 0, 0, params);
+        m_hPlayer = nativeOpen(context, url, null, 0, 0, params);
+
+        if (m_hPlayer == -1) {
+            Toast.makeText(context, "鉴权不通过，请联系管理员!", Toast.LENGTH_SHORT).show();
+            m_hPlayer = 0;
+        }
+
         return m_hPlayer != 0 ? true : false;
     }
 
@@ -103,7 +111,7 @@ public final class MediaPlayer
     //-- for player event callback
 
     private long m_hPlayer = 0;
-    private native long nativeOpen (String url, Object surface, int w, int h, String params);
+    private native long nativeOpen (Object context, String url, Object surface, int w, int h, String params);
     private native void nativeClose(long hplayer);
     private native void nativePlay (long hplayer);
     private native void nativePause(long hplayer);

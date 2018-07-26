@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mURL = mEtInputUrl.getText().toString().trim();
 
         mIsLive = mURL.startsWith("http://") && mURL.endsWith(".m3u8") || mURL.startsWith("rtmp://") || mURL.startsWith("rtsp://");
-        mPlayer = new MediaPlayer(mURL, mHandler, "video_hwaccel=1;video_rotate=0");
+        mPlayer = new MediaPlayer(getApplicationContext(), mURL, mHandler, "video_hwaccel=1;video_rotate=0");
         mRoot = (PlayerView)findViewById(R.id.player_root);
         mRoot.setOnSizeChangedListener(new PlayerView.OnSizeChangedListener() {
             @Override
@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
-        mPlayer.open(mURL, "video_hwaccel=1;video_rotate=0");
+        mPlayer.open(getApplicationContext(), mURL, "video_hwaccel=1;video_rotate=0");
     }
 
     public void stop() {
