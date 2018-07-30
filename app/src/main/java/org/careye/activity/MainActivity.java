@@ -188,6 +188,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         stop();
 
+        mBuffering.setVisibility(View.VISIBLE);
         mURL = mEtInputUrl.getText().toString().trim();
         if (TextUtils.isEmpty(mURL)) {
             Log.e(TAG, "play : mURL is NULL");
@@ -272,7 +273,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case MediaPlayer.MSG_OPEN_FAILED: {
                     String str = String.format(getString(R.string.open_video_failed), mURL);
-                    Toast.makeText(MainActivity.this, str, Toast.LENGTH_LONG).show();
+//                    Toast.makeText(MainActivity.this, str, Toast.LENGTH_LONG).show();
                 }
                 break;
             case MediaPlayer.MSG_PLAY_COMPLETED: {

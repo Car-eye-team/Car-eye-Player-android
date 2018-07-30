@@ -69,7 +69,7 @@
         android:id="@+id/et_input_url"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="请输入RTSP地址"
+        android:hint="请输入流地址"
         android:text="rtmp://live.hkstv.hk.lxdns.com/live/hks" />
 
     <org.careye.player.PlayerView
