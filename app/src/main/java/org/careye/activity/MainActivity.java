@@ -89,6 +89,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mURL = mEtInputUrl.getText().toString().trim();
 
+//        mEtInputUrl.setText("rtsp://184.72.239.149/vod/mp4://BigBuckBunny_175k.mov");
+
         mIsLive = mURL.startsWith("http://") && mURL.endsWith(".m3u8") || mURL.startsWith("rtmp://") || mURL.startsWith("rtsp://");
         mPlayer = new MediaPlayer(getApplicationContext(), mURL, mHandler, "video_hwaccel=1;video_rotate=0");
         mRoot = (PlayerView)findViewById(R.id.player_root);
@@ -186,9 +188,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (mPlayer == null) {
             return;
         }
+        testPlayerPlay(false);
         stop();
-
         mBuffering.setVisibility(View.VISIBLE);
+
         mURL = mEtInputUrl.getText().toString().trim();
         if (TextUtils.isEmpty(mURL)) {
             Log.e(TAG, "play : mURL is NULL");
@@ -290,6 +293,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (id == R.id.btn_play) {
             play();
         } else if (id == R.id.btn_stop) {
+            testPlayerPlay(false);
             stop();
         }
     }
