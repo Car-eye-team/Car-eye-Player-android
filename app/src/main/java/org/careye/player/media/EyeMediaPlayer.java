@@ -90,16 +90,16 @@ public final class EyeMediaPlayer extends AbstractMediaPlayer {
 
     //----------------------------------------
     // options
-    public static final int IJK_LOG_UNKNOWN = 0;
-    public static final int IJK_LOG_DEFAULT = 1;
+    public static final int EYE_LOG_UNKNOWN = 0;
+    public static final int EYE_LOG_DEFAULT = 1;
 
-    public static final int IJK_LOG_VERBOSE = 2;
-    public static final int IJK_LOG_DEBUG = 3;
-    public static final int IJK_LOG_INFO = 4;
-    public static final int IJK_LOG_WARN = 5;
-    public static final int IJK_LOG_ERROR = 6;
-    public static final int IJK_LOG_FATAL = 7;
-    public static final int IJK_LOG_SILENT = 8;
+    public static final int EYE_LOG_VERBOSE = 2;
+    public static final int EYE_LOG_DEBUG = 3;
+    public static final int EYE_LOG_INFO = 4;
+    public static final int EYE_LOG_WARN = 5;
+    public static final int EYE_LOG_ERROR = 6;
+    public static final int EYE_LOG_FATAL = 7;
+    public static final int EYE_LOG_SILENT = 8;
 
     public static final int OPT_CATEGORY_FORMAT     = 1;
     public static final int OPT_CATEGORY_CODEC      = 2;
@@ -436,7 +436,7 @@ public final class EyeMediaPlayer extends AbstractMediaPlayer {
                     sb.append(entry.getValue());
                 sb.append("\r\n");
                 setOption(OPT_CATEGORY_FORMAT, "headers", sb.toString());
-                setOption(EyeMediaPlayer.OPT_CATEGORY_FORMAT, "protocol_whitelist", "async,cache,crypto,file,http,https,ijkhttphook,ijkinject,ijklivehook,ijklongurl,ijksegment,ijktcphook,pipe,rtp,tcp,tls,udp,ijkurlhook,data");
+                setOption(EyeMediaPlayer.OPT_CATEGORY_FORMAT, "protocol_whitelist", "async,cache,crypto,file,http,https,ijkhttphook,ijkinject,livehook,ijklongurl,ijksegment,ijktcphook,pipe,rtp,tcp,tls,udp,ijkurlhook,data");
             }
         }
         setDataSource(path);
@@ -864,7 +864,7 @@ public final class EyeMediaPlayer extends AbstractMediaPlayer {
     @Override
     public MediaInfo getMediaInfo() {
         MediaInfo mediaInfo = new MediaInfo();
-        mediaInfo.mMediaPlayerName = "ijkplayer";
+        mediaInfo.mMediaPlayerName = "eyeplayer";
 
         String videoCodecInfo = _getVideoCodecInfo();
         if (!TextUtils.isEmpty(videoCodecInfo)) {
@@ -947,11 +947,11 @@ public final class EyeMediaPlayer extends AbstractMediaPlayer {
 
     private static native void native_init();
 
-    private native void native_setup(Object IjkMediaPlayer_this);
+    private native void native_setup(Object EyeMediaPlayer_this);
 
     private native void native_finalize();
 
-    private native void native_message_loop(Object IjkMediaPlayer_this);
+    private native void native_message_loop(Object EyeMediaPlayer_this);
 
     protected void finalize() throws Throwable {
         super.finalize();

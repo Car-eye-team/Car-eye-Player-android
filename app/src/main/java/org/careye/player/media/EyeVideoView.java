@@ -59,6 +59,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.careye.player.media.misc.IMediaDataSource;
+import org.w3c.dom.Text;
 
 public class EyeVideoView extends FrameLayout implements MediaController.MediaPlayerControl {
     private String TAG = "EyeVideoView";
@@ -245,6 +246,15 @@ public class EyeVideoView extends FrameLayout implements MediaController.MediaPl
      * @param path the path of the video.
      */
     public void setVideoPath(String path) {
+
+        if (TextUtils.isEmpty(path))
+            return;
+
+        //加入重连
+        if (path.startsWith("rtmp") || path.startsWith("rtsp")) {
+            path = "livehook:" + path;
+        }
+
         setVideoURI(Uri.parse(path));
     }
 
@@ -976,7 +986,7 @@ public class EyeVideoView extends FrameLayout implements MediaController.MediaPl
         EyeMediaPlayer ijkMediaPlayer = null;
         if (mUri != null) {
             ijkMediaPlayer = new EyeMediaPlayer();
-            ijkMediaPlayer.native_setLogLevel(EyeMediaPlayer.IJK_LOG_DEBUG);
+            ijkMediaPlayer.native_setLogLevel(EyeMediaPlayer.EYE_LOG_DEBUG);
 
             //TODO
             boolean isUsingMediaCodec = true;
