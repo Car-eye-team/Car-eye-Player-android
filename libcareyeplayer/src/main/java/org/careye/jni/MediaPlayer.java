@@ -46,7 +46,7 @@ public final class MediaPlayer
 
     public boolean open(Context context, String url, String params) {
         nativeClose(m_hPlayer);
-        m_hPlayer = nativeOpen(context, url, null, 0, 0, params);
+        m_hPlayer = nativeOpen(url, null, 0, 0, params);
 
         if (m_hPlayer == -1) {
             Toast.makeText(context, "鉴权不通过，请联系管理员!", Toast.LENGTH_SHORT).show();
@@ -111,7 +111,7 @@ public final class MediaPlayer
     //-- for player event callback
 
     private long m_hPlayer = 0;
-    private native long nativeOpen (Object context, String url, Object surface, int w, int h, String params);
+    private native long nativeOpen (/*Object context,*/ String url, Object surface, int w, int h, String params);
     private native void nativeClose(long hplayer);
     private native void nativePlay (long hplayer);
     private native void nativePause(long hplayer);
@@ -121,7 +121,7 @@ public final class MediaPlayer
     private native void nativeSetDisplaySurface(long hplayer, Object surf);
 
     static {
-        System.loadLibrary("PlayerJni");
+        System.loadLibrary("fanplayer_jni");
     }
 };
 
