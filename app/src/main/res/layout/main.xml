@@ -72,39 +72,19 @@
         android:hint="请输入流地址"
         android:text="rtmp://live.hkstv.hk.lxdns.com/live/hks" />
 
-    <org.careye.player.PlayerView
-        android:id="@+id/player_root"
-        android:layout_weight="1"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
-        <SurfaceView
-            android:id="@+id/video_view"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_centerInParent="true" />
-        <ProgressBar
-            android:id="@+id/buffering"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:alpha="0.8"
-            />
-        <SeekBar
-            android:id="@+id/seek_bar"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:alpha="0.8" />
-        <ImageView
-            android:id="@+id/btn_playpause"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@drawable/icn_media_pause"
-            android:alpha="0.8"
-            />
-    </org.careye.player.PlayerView>
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <org.careye.player.media.EyeVideoView
+                android:layout_weight="1"
+                android:id="@+id/video_player1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
 
     <LinearLayout
         android:layout_below="@+id/player_root"
@@ -120,6 +100,14 @@
         <Button
             android:id="@+id/btn_stop"
             android:text="停止"
+            android:layout_marginLeft="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/btn_pic"
+            android:text="抓拍"
+            android:layout_marginLeft="4dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
 
