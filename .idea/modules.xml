@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Car-eye-Player-android.iml" filepath="$PROJECT_DIR$/Car-eye-Player-android.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/car-eye.iml" filepath="$PROJECT_DIR$/car-eye.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libcareyeplayer/libcareyeplayer.iml" filepath="$PROJECT_DIR$/libcareyeplayer/libcareyeplayer.iml" />
     </modules>
   </component>
 </project>
