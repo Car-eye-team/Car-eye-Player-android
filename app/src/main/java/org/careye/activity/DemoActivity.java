@@ -25,9 +25,9 @@ import com.careye.rtmp.careyeplayer.R;
 import org.careye.player.media.EyeVideoView;
 import org.careye.util.PicUtils;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class DemoActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private final String TAG = "MainActivity";
+    private final String TAG = "DemoActivity";
 
     private String       mURL       = "rtmp://live.hkstv.hk.lxdns.com/live/hks";
 //    private String mURL = "rtsp://184.72.239.149/vod/mp4://BigBuckBunny_175k.mov";
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.activity_demo);
 
         Intent intent = getIntent();
         String action = intent.getAction();
@@ -166,9 +166,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             @Override
                             public void run() {
                                 if (result[0]) {
-                                    Toast.makeText(MainActivity.this, path[0], Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(DemoActivity.this, path[0], Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Toast.makeText(MainActivity.this, "抓拍失败", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(DemoActivity.this, "抓拍失败", Toast.LENGTH_SHORT).show();
                                 }
 
                             }

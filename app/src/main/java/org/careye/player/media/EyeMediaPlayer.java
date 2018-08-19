@@ -1066,7 +1066,7 @@ public final class EyeMediaPlayer extends AbstractMediaPlayer {
 
     /*
      * Called from native code when an interesting event happens. This method
-     * just uses the EventHandler system to post the event back to the main app
+     * just uses the EventHandler system to post the event back to the activity_demo app
      * thread. We use a weak reference to the original EyeMediaPlayer object so
      * that the native code is safe from the object disappearing from underneath
      * it. (This is the cookie passed to native_setup().)
