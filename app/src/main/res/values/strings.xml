@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">CarEyeRtmpPlyer</string>
+    <string name="app_name">CarEyePlyer</string>
     <string name="open_video_failed">Failed to open video url: %s !</string>
 
     <string name="N_A">N/A</string>
