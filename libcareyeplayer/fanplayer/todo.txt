@@ -1,2 +1,0 @@
-1. subtitle/lrc
-2. sync apts/vpts to system clock

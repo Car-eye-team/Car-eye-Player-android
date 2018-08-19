@@ -1,6 +1,7 @@
 /*
- * Copyright (C) 2015 Bilibili
- * Copyright (C) 2015 Zhang Rui <bbcallen@gmail.com>
+ * Car eye 车辆管理平台: www.car-eye.cn
+ * Car eye 开源网址: https://github.com/Car-eye-team
+ * Copyright 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
