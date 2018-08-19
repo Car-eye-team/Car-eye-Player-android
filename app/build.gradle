@@ -24,7 +24,7 @@ android {
 
     sourceSets {
         main {
-            jniLibs.srcDirs = ['src/main/jniLibs']
+            //jniLibs.srcDirs = ['src/main/jniLibs']
         }
     }
 }
@@ -32,5 +32,7 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
+//    compile project(':libcareyeplayer')
+    implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'
 }
 
