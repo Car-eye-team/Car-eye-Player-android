@@ -1277,7 +1277,14 @@ public final class EyeMediaPlayer extends AbstractMediaPlayer {
         }
     }
 
+    @Override
+    public void enableVolume(boolean enableVolume) {
+        _enableVolume(enableVolume);
+    }
+
     public static native void native_profileBegin(String libName);
     public static native void native_profileEnd();
     public static native void native_setLogLevel(int level);
+
+    public native void _enableVolume(boolean enableVolume);
 }

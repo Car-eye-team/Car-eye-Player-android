@@ -37,6 +37,7 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
     private Button mBtnPlay;
     private Button mBtnStop;
     private Button mBtnPic;
+    private Button mBtnEnableVolume;
 
     private String picName = "careye_";
 
@@ -74,6 +75,7 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
         mBtnStop.setOnClickListener(this);
         mBtnPlay.setOnClickListener(this);
         mBtnPic.setOnClickListener(this);
+        mBtnEnableVolume.setOnClickListener(this);
     }
 
     private void initView() {
@@ -82,6 +84,7 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
         mBtnStop = findViewById(R.id.btn_stop);
         mEtInputUrl = findViewById(R.id.et_input_url);
         mBtnPic = findViewById(R.id.btn_pic);
+        mBtnEnableVolume = findViewById(R.id.btn_enable_volume);
     }
 
     @Override
@@ -176,6 +179,15 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 }
             }).start();
+        } else if(id == R.id.btn_enable_volume) {
+            //静音
+            if ("静音关".equals(mBtnEnableVolume.getText().toString())) {
+                mVideoPlayer1.enableVolume(true);
+                mBtnEnableVolume.setText("静音开");
+            } else{
+                mVideoPlayer1.enableVolume(false);
+                mBtnEnableVolume.setText("静音关");
+            }
         }
 
     }

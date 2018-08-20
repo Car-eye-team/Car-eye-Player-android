@@ -972,56 +972,56 @@ public class EyeVideoView extends FrameLayout implements MediaController.MediaPl
     public IMediaPlayer createPlayer() {
         IMediaPlayer mediaPlayer = null;
 
-        EyeMediaPlayer ijkMediaPlayer = null;
+        EyeMediaPlayer eyeMediaPlayer = null;
         if (mUri != null) {
-            ijkMediaPlayer = new EyeMediaPlayer();
-            ijkMediaPlayer.native_setLogLevel(EyeMediaPlayer.EYE_LOG_DEBUG);
+            eyeMediaPlayer = new EyeMediaPlayer();
+            eyeMediaPlayer.native_setLogLevel(EyeMediaPlayer.EYE_LOG_DEBUG);
 
             //TODO
             boolean isUsingMediaCodec = true;
             if (isUsingMediaCodec) {
-                ijkMediaPlayer.setOption(EyeMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec", 1);
+                eyeMediaPlayer.setOption(EyeMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec", 1);
 
 
                 boolean UsingMediaCodecAutoRotate = false;
                 if (UsingMediaCodecAutoRotate) {
-                    ijkMediaPlayer.setOption(EyeMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-auto-rotate", 1);
+                    eyeMediaPlayer.setOption(EyeMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-auto-rotate", 1);
                 } else {
-                    ijkMediaPlayer.setOption(EyeMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-auto-rotate", 0);
+                    eyeMediaPlayer.setOption(EyeMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-auto-rotate", 0);
                 }
 
                 boolean MediaCodecHandleResolutionChange = false;
                 if (MediaCodecHandleResolutionChange) {
-                    ijkMediaPlayer.setOption(EyeMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-handle-resolution-change", 1);
+                    eyeMediaPlayer.setOption(EyeMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-handle-resolution-change", 1);
                 } else {
-                    ijkMediaPlayer.setOption(EyeMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-handle-resolution-change", 0);
+                    eyeMediaPlayer.setOption(EyeMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-handle-resolution-change", 0);
                 }
             } else {
-                ijkMediaPlayer.setOption(EyeMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec", 0);
+                eyeMediaPlayer.setOption(EyeMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec", 0);
             }
 
             boolean isUsingOpenSLES = false;
             if (isUsingOpenSLES) {
-                ijkMediaPlayer.setOption(EyeMediaPlayer.OPT_CATEGORY_PLAYER, "opensles", 1);
+                eyeMediaPlayer.setOption(EyeMediaPlayer.OPT_CATEGORY_PLAYER, "opensles", 1);
             } else {
-                ijkMediaPlayer.setOption(EyeMediaPlayer.OPT_CATEGORY_PLAYER, "opensles", 0);
+                eyeMediaPlayer.setOption(EyeMediaPlayer.OPT_CATEGORY_PLAYER, "opensles", 0);
             }
 
 //                    String pixelFormat = mSettings.getPixelFormat();
             String pixelFormat = null;
             if (TextUtils.isEmpty(pixelFormat)) {
-                ijkMediaPlayer.setOption(EyeMediaPlayer.OPT_CATEGORY_PLAYER, "overlay-format", EyeMediaPlayer.SDL_FCC_RV32);
+                eyeMediaPlayer.setOption(EyeMediaPlayer.OPT_CATEGORY_PLAYER, "overlay-format", EyeMediaPlayer.SDL_FCC_RV32);
             } else {
-                ijkMediaPlayer.setOption(EyeMediaPlayer.OPT_CATEGORY_PLAYER, "overlay-format", pixelFormat);
+                eyeMediaPlayer.setOption(EyeMediaPlayer.OPT_CATEGORY_PLAYER, "overlay-format", pixelFormat);
             }
-            ijkMediaPlayer.setOption(EyeMediaPlayer.OPT_CATEGORY_PLAYER, "framedrop", 1);
-            ijkMediaPlayer.setOption(EyeMediaPlayer.OPT_CATEGORY_PLAYER, "start-on-prepared", 0);
+            eyeMediaPlayer.setOption(EyeMediaPlayer.OPT_CATEGORY_PLAYER, "framedrop", 1);
+            eyeMediaPlayer.setOption(EyeMediaPlayer.OPT_CATEGORY_PLAYER, "start-on-prepared", 0);
 
-            ijkMediaPlayer.setOption(EyeMediaPlayer.OPT_CATEGORY_FORMAT, "http-detect-range-support", 0);
+            eyeMediaPlayer.setOption(EyeMediaPlayer.OPT_CATEGORY_FORMAT, "http-detect-range-support", 0);
 
-            ijkMediaPlayer.setOption(EyeMediaPlayer.OPT_CATEGORY_CODEC, "skip_loop_filter", 48);
+            eyeMediaPlayer.setOption(EyeMediaPlayer.OPT_CATEGORY_CODEC, "skip_loop_filter", 48);
         }
-        mediaPlayer = ijkMediaPlayer;
+        mediaPlayer = eyeMediaPlayer;
         return mediaPlayer;
     }
 
@@ -1141,5 +1141,11 @@ public class EyeVideoView extends FrameLayout implements MediaController.MediaPl
     @TargetApi(14)
     public Bitmap getPic() {
         return this.mRenderView instanceof TextureRenderView ? ((TextureRenderView) this.mRenderView).getBitmap() : null;
+    }
+
+    public void enableVolume(boolean enableVolume) {
+        if (mMediaPlayer != null){
+            mMediaPlayer.enableVolume(enableVolume);
+        }
     }
 }

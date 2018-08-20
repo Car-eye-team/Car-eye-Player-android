@@ -199,4 +199,10 @@ public interface IMediaPlayer {
      * AndroidMediaPlayer: M:
      */
     void setDataSource(IMediaDataSource mediaDataSource);
+
+    /**
+     * enable : volume
+     * @param enableVolume      enalbe
+     */
+    void enableVolume(boolean enableVolume);
 }

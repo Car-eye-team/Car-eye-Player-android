@@ -71,6 +71,11 @@ public class MediaPlayerProxy implements IMediaPlayer {
     }
 
     @Override
+    public void enableVolume(boolean enableVolume) {
+        mBackEndMediaPlayer.enableVolume(enableVolume);
+    }
+
+    @Override
     public String getDataSource() {
         return mBackEndMediaPlayer.getDataSource();
     }
