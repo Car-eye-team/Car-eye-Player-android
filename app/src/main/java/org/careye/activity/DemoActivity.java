@@ -38,8 +38,11 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
     private Button mBtnStop;
     private Button mBtnPic;
     private Button mBtnEnableVolume;
+    private Button mBtnEnableVideo;
 
     private String picName = "careye_";
+
+    private boolean mBackPressed;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,8 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
 
         initView();
         initListener();
+
+        play();
     }
 
     private void initListener() {
@@ -76,6 +81,7 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
         mBtnPlay.setOnClickListener(this);
         mBtnPic.setOnClickListener(this);
         mBtnEnableVolume.setOnClickListener(this);
+        mBtnEnableVideo.setOnClickListener(this);
     }
 
     private void initView() {
@@ -85,6 +91,7 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
         mEtInputUrl = findViewById(R.id.et_input_url);
         mBtnPic = findViewById(R.id.btn_pic);
         mBtnEnableVolume = findViewById(R.id.btn_enable_volume);
+        mBtnEnableVideo = findViewById(R.id.btn_enable_video);
     }
 
     @Override
@@ -96,13 +103,24 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onResume() {
         super.onResume();
-        play();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mBackPressed || !mVideoPlayer1.isBackgroundPlayEnabled()) {
+            mVideoPlayer1.stopPlayback();
+            mVideoPlayer1.release(true);
+            mVideoPlayer1.stopBackgroundPlay();
+        } else {
+            mVideoPlayer1.enterBackground();
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        stop();
+//        stop();
     }
 
     @Override
@@ -124,12 +142,11 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
         mVideoPlayer1.stopBackgroundPlay();
     }
 
-    private void testPlayerPlay(boolean play) {
-    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
 
-    private void showUIControls(boolean show, boolean autohide) {
     }
-
 
     @Override
     public void onClick(View v) {

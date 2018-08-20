@@ -1032,11 +1032,11 @@ public class EyeVideoView extends FrameLayout implements MediaController.MediaPl
     private boolean mEnableBackgroundPlay = false;
 
     private void initBackground() {
-//        mEnableBackgroundPlay = mSettings.getEnableBackgroundPlay();
-//        if (mEnableBackgroundPlay) {
+        mEnableBackgroundPlay = true;
+        if (mEnableBackgroundPlay) {
             MediaPlayerService.intentToStart(getContext());
             mMediaPlayer = MediaPlayerService.getMediaPlayer();
-//        }
+        }
     }
 
     public boolean isBackgroundPlayEnabled() {
