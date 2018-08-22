@@ -88,11 +88,13 @@
 
     <LinearLayout
         android:layout_below="@+id/player_root"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/btn_play"
+            android:layout_weight="1"
             android:text="播放"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
@@ -100,6 +102,7 @@
         <Button
             android:id="@+id/btn_stop"
             android:text="停止"
+            android:layout_weight="1"
             android:layout_marginLeft="4dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
@@ -107,6 +110,7 @@
         <Button
             android:id="@+id/btn_pic"
             android:text="抓拍"
+            android:layout_weight="1"
             android:layout_marginLeft="4dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
@@ -120,7 +124,8 @@
 
         <Button
             android:id="@+id/btn_enable_video"
-            android:text="video"
+            android:text="画面关"
+            android:layout_weight="1"
             android:layout_marginLeft="4dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />

@@ -97,7 +97,7 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onDestroy() {
         super.onDestroy();
-
+        stop();
     }
 
     @Override
@@ -205,8 +205,19 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
                 mVideoPlayer1.enableVolume(false);
                 mBtnEnableVolume.setText("静音关");
             }
+        } else if (id == R.id.btn_enable_video) {
+            if ("画面关".equals(mBtnEnableVideo.getText().toString())) {
+                mVideoPlayer1.enableVideo(false);
+                mBtnEnableVideo.setText("画面开");
+            } else {
+                mVideoPlayer1.enableVideo(true);
+                mBtnEnableVideo.setText("画面关");
+            }
+
         }
 
     }
+
+    private boolean test = false;
 }
 

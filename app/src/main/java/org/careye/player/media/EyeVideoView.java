@@ -1143,9 +1143,28 @@ public class EyeVideoView extends FrameLayout implements MediaController.MediaPl
         return this.mRenderView instanceof TextureRenderView ? ((TextureRenderView) this.mRenderView).getBitmap() : null;
     }
 
-    public void enableVolume(boolean enableVolume) {
+    public void enableVolume(boolean enableMute) {
         if (mMediaPlayer != null){
-            mMediaPlayer.enableVolume(enableVolume);
+            mMediaPlayer.enableMute(enableMute);
+        }
+    }
+
+    public void enableVideo(boolean enableVideo) {
+        if (mMediaPlayer != null) {
+            mMediaPlayer.enableVideo(enableVideo);
+
+            View view = null;
+            if (mRenderView == null) {
+                return;
+            }
+            view = mRenderView.getView();
+            if (view == null)
+                return;
+            if (enableVideo) {
+                view.setVisibility(VISIBLE);
+            } else {
+                view.setVisibility(INVISIBLE);
+            }
         }
     }
 }

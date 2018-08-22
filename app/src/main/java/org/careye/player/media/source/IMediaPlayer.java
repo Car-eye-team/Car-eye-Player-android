@@ -202,7 +202,13 @@ public interface IMediaPlayer {
 
     /**
      * enable : volume
-     * @param enableVolume      enalbe
+     * @param enableMute      enalbe
      */
-    void enableVolume(boolean enableVolume);
+    void enableMute(boolean enableMute);
+
+    /**
+     * enable : video
+     * @param enableVideo       enable
+     */
+    void enableVideo(boolean enableVideo);
 }

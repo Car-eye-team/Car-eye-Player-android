@@ -71,8 +71,13 @@ public class MediaPlayerProxy implements IMediaPlayer {
     }
 
     @Override
-    public void enableVolume(boolean enableVolume) {
-        mBackEndMediaPlayer.enableVolume(enableVolume);
+    public void enableMute(boolean enableMute) {
+        mBackEndMediaPlayer.enableMute(enableMute);
+    }
+
+    @Override
+    public void enableVideo(boolean enableVideo) {
+        mBackEndMediaPlayer.enableVideo(enableVideo);
     }
 
     @Override
