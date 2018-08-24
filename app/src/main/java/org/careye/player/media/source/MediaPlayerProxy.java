@@ -71,16 +71,6 @@ public class MediaPlayerProxy implements IMediaPlayer {
     }
 
     @Override
-    public void enableMute(boolean enableMute) {
-        mBackEndMediaPlayer.enableMute(enableMute);
-    }
-
-    @Override
-    public void enableVideo(boolean enableVideo) {
-        mBackEndMediaPlayer.enableVideo(enableVideo);
-    }
-
-    @Override
     public String getDataSource() {
         return mBackEndMediaPlayer.getDataSource();
     }
@@ -333,5 +323,30 @@ public class MediaPlayerProxy implements IMediaPlayer {
     @Override
     public boolean isLooping() {
         return mBackEndMediaPlayer.isLooping();
+    }
+
+    @Override
+    public void enableMute(boolean enableMute) {
+        mBackEndMediaPlayer.enableMute(enableMute);
+    }
+
+    @Override
+    public void enableVideo(boolean enableVideo) {
+        mBackEndMediaPlayer.enableVideo(enableVideo);
+    }
+
+    @Override
+    public int startRec(String filePath) {
+        return mBackEndMediaPlayer.startRec(filePath);
+    }
+
+    @Override
+    public void stopRec() {
+        mBackEndMediaPlayer.stopRec();
+    }
+
+    @Override
+    public boolean getRecState() {
+        return mBackEndMediaPlayer.getRecState();
     }
 }

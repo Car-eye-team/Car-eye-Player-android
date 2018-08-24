@@ -55,6 +55,8 @@ public interface IMediaPlayer {
     int MEDIA_ERROR_UNSUPPORTED = -1010;
     int MEDIA_ERROR_TIMED_OUT = -110;
 
+    int MEDIA_REC_RECORDING = -900001;//录制中
+
     void setDisplay(SurfaceHolder sh);
 
     void setDataSource(Context context, Uri uri)
@@ -211,4 +213,20 @@ public interface IMediaPlayer {
      * @param enableVideo       enable
      */
     void enableVideo(boolean enableVideo);
+
+    /**
+     * rec : start
+     * @param filePath          file path
+     */
+    int startRec(String filePath);
+
+    /**
+     * rec : stop
+     */
+    void stopRec();
+
+    /**
+     * rec : state
+     */
+    boolean getRecState();
 }

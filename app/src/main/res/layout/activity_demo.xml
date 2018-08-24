@@ -90,7 +90,7 @@
         android:layout_below="@+id/player_root"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="50dp">
 
         <Button
             android:id="@+id/btn_play"
@@ -130,6 +130,31 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/player_root"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <Button
+            android:id="@+id/btn_rec_start"
+            android:text="录制Start"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/btn_rec_stop"
+            android:layout_marginLeft="5dp"
+            android:text="录制Stop"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/tv_rec_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </LinearLayout>

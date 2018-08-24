@@ -1287,10 +1287,28 @@ public final class EyeMediaPlayer extends AbstractMediaPlayer {
         _enableVideo(enableVideo);
     }
 
+    @Override
+    public int startRec(String filePath) {
+        return _startRec(filePath);
+    }
+
+    @Override
+    public void stopRec() {
+        _stopRec();
+    }
+
+    @Override
+    public boolean getRecState() {
+        return _getRecState();
+    }
+
     public static native void native_profileBegin(String libName);
     public static native void native_profileEnd();
     public static native void native_setLogLevel(int level);
 
     public native void _enableMute(boolean enableMute);
     public native void _enableVideo(boolean enableVideo);
+    public native int _startRec(String filePath);
+    public native int _stopRec();
+    public native boolean _getRecState();
 }

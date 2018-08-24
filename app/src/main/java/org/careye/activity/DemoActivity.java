@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.careye.rtmp.careyeplayer.R;
@@ -29,8 +31,9 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
 
     private final String TAG = "DemoActivity";
 
-    private String       mURL       = "rtmp://live.hkstv.hk.lxdns.com/live/hks";
+    private String       mURL       = "rtmp://live.hkstv.hk.lxdns.com:1935/live/hks";
 //    private String mURL = "rtsp://184.72.239.149/vod/mp4://BigBuckBunny_175k.mov";
+//    private String mURL = "rtmp://www.car-eye.cn:10077/live/15922222222&channel=4";
 
     private EditText mEtInputUrl;
     private EyeVideoView mVideoPlayer1;
@@ -39,10 +42,16 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
     private Button mBtnPic;
     private Button mBtnEnableVolume;
     private Button mBtnEnableVideo;
+    private TextView mTvRecState;
+
+    private Button mBtnRecStart;
+    private Button mBtnRecStop;
 
     private String picName = "careye_";
 
     private boolean mBackPressed;
+
+    private boolean isRecRunning = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,6 +83,7 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
         initListener();
 
         play();
+        mRecStateThread.start();
     }
 
     private void initListener() {
@@ -82,6 +92,8 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
         mBtnPic.setOnClickListener(this);
         mBtnEnableVolume.setOnClickListener(this);
         mBtnEnableVideo.setOnClickListener(this);
+        mBtnRecStop.setOnClickListener(this);
+        mBtnRecStart.setOnClickListener(this);
     }
 
     private void initView() {
@@ -92,12 +104,16 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
         mBtnPic = findViewById(R.id.btn_pic);
         mBtnEnableVolume = findViewById(R.id.btn_enable_volume);
         mBtnEnableVideo = findViewById(R.id.btn_enable_video);
+        mBtnRecStart = findViewById(R.id.btn_rec_start);
+        mBtnRecStop = findViewById(R.id.btn_rec_stop);
+        mTvRecState = findViewById(R.id.tv_rec_state);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         stop();
+        isRecRunning = false;
     }
 
     @Override
@@ -213,11 +229,43 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
                 mVideoPlayer1.enableVideo(true);
                 mBtnEnableVideo.setText("画面关");
             }
-
+        } else if (id == R.id.btn_rec_start) {
+            String pathSrc = Environment.getExternalStorageDirectory().getAbsolutePath() + "/careye/video/";
+            String path = pathSrc + SystemClock.uptimeMillis() + ".mp4";
+            int result = mVideoPlayer1.startRecord(path);
+            if (result != 0) {
+                Toast.makeText(this, "录制启动失败 : " + result, Toast.LENGTH_SHORT).show();
+            }
+        } else if (id == R.id.btn_rec_stop) {
+            mVideoPlayer1.stopRecord();
         }
 
     }
 
-    private boolean test = false;
+    private Thread mRecStateThread = new Thread(new Runnable() {
+        @Override
+        public void run() {
+
+            while (isRecRunning) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (mTvRecState != null && mVideoPlayer1 != null) {
+                            boolean state = mVideoPlayer1.getRecState();
+
+                            mTvRecState.setText("Rec : " + state);
+                        }
+                    }
+                });
+
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    });
+
 }
 

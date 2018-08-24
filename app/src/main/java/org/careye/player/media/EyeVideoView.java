@@ -1167,4 +1167,26 @@ public class EyeVideoView extends FrameLayout implements MediaController.MediaPl
             }
         }
     }
+
+    public int startRecord(String filePath) {
+
+        if (TextUtils.isEmpty(filePath) || mMediaPlayer == null) {
+            Log.d(TAG, "startRec : filePath or mMediaPlauer is NULL : " + filePath);
+            return -1;
+        }
+        return mMediaPlayer.startRec(filePath);
+    }
+
+    public void stopRecord() {
+        if (mMediaPlayer != null) {
+            mMediaPlayer.stopRec();
+        }
+    }
+
+    public boolean getRecState() {
+        if (mMediaPlayer != null) {
+            return mMediaPlayer.getRecState();
+        }
+        return false;
+    }
 }
