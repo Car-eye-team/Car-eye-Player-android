@@ -218,7 +218,7 @@ public interface IMediaPlayer {
      * rec : start
      * @param filePath          file path
      */
-    int startRec(String filePath);
+    int startRec(String filePath, String fileName);
 
     /**
      * rec : stop

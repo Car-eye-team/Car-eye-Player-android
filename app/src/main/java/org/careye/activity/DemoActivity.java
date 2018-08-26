@@ -5,16 +5,22 @@
  */
 package org.careye.activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.SystemClock;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +32,9 @@ import com.careye.rtmp.careyeplayer.R;
 
 import org.careye.player.media.EyeVideoView;
 import org.careye.util.PicUtils;
+
+import java.io.File;
+import java.io.IOException;
 
 public class DemoActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -50,6 +59,11 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
     private String picName = "careye_";
 
     private boolean mBackPressed;
+
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            "android.permission.READ_EXTERNAL_STORAGE",
+            "android.permission.WRITE_EXTERNAL_STORAGE" };
 
     private boolean isRecRunning = true;
 
@@ -230,16 +244,53 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
                 mBtnEnableVideo.setText("画面关");
             }
         } else if (id == R.id.btn_rec_start) {
-            String pathSrc = Environment.getExternalStorageDirectory().getAbsolutePath() + "/careye/video/";
-            String path = pathSrc + SystemClock.uptimeMillis() + ".mp4";
-            int result = mVideoPlayer1.startRecord(path);
-            if (result != 0) {
-                Toast.makeText(this, "录制启动失败 : " + result, Toast.LENGTH_SHORT).show();
+
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                boolean ret = checkPermission();
+                if (!ret)
+                    return;
             }
+            startRec();
         } else if (id == R.id.btn_rec_stop) {
             mVideoPlayer1.stopRecord();
         }
 
+    }
+
+    private void startRec() {
+        String filePath= Environment.getExternalStorageDirectory().getAbsolutePath() + "/careye/video/";
+        String fileName =  SystemClock.uptimeMillis() + ".mp4";
+
+        int result = mVideoPlayer1.startRecord(filePath, fileName);
+        if (result != 0) {
+            Toast.makeText(this, "录制启动失败 : " + result, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (grantResults.length > 0 && requestCode == REQUEST_EXTERNAL_STORAGE && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            startRec();
+        }
+    }
+
+
+    private boolean checkPermission() {
+        //检查权限（NEED_PERMISSION）是否被授权 PackageManager.PERMISSION_GRANTED表示同意授权
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            //用户已经拒绝过一次，再次弹出权限申请对话框需要给用户一个解释
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission
+                    .WRITE_EXTERNAL_STORAGE)) {
+                Toast.makeText(this, "请开通相关权限，否则无法正常使用此功能！", Toast.LENGTH_SHORT).show();
+            }
+            //申请权限
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_EXTERNAL_STORAGE);
+            return false;
+        } else {
+           return true;
+        }
     }
 
     private Thread mRecStateThread = new Thread(new Runnable() {

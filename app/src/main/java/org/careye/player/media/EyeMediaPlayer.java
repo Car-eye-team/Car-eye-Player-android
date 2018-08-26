@@ -1288,8 +1288,8 @@ public final class EyeMediaPlayer extends AbstractMediaPlayer {
     }
 
     @Override
-    public int startRec(String filePath) {
-        return _startRec(filePath);
+    public int startRec(String filePath, String fileName) {
+        return _startRec(filePath, fileName);
     }
 
     @Override
@@ -1308,7 +1308,7 @@ public final class EyeMediaPlayer extends AbstractMediaPlayer {
 
     public native void _enableMute(boolean enableMute);
     public native void _enableVideo(boolean enableVideo);
-    public native int _startRec(String filePath);
+    public native int _startRec(String filePath, String fileName);
     public native int _stopRec();
     public native boolean _getRecState();
 }

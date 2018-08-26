@@ -336,8 +336,8 @@ public class MediaPlayerProxy implements IMediaPlayer {
     }
 
     @Override
-    public int startRec(String filePath) {
-        return mBackEndMediaPlayer.startRec(filePath);
+    public int startRec(String filePath, String fileName) {
+        return mBackEndMediaPlayer.startRec(filePath, fileName);
     }
 
     @Override
