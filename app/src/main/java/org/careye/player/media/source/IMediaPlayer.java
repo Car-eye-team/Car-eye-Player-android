@@ -229,4 +229,8 @@ public interface IMediaPlayer {
      * rec : state
      */
     boolean getRecState();
+
+    boolean getMuteState();
+
+    boolean getShowVideoState();
 }

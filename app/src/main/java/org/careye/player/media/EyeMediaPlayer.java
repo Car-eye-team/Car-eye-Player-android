@@ -1302,6 +1302,16 @@ public final class EyeMediaPlayer extends AbstractMediaPlayer {
         return _getRecState();
     }
 
+    @Override
+    public boolean getMuteState(){
+        return isMute();
+    }
+
+    @Override
+    public boolean getShowVideoState() {
+        return isShowVideo();
+    }
+
     public static native void native_profileBegin(String libName);
     public static native void native_profileEnd();
     public static native void native_setLogLevel(int level);
@@ -1311,4 +1321,6 @@ public final class EyeMediaPlayer extends AbstractMediaPlayer {
     public native int _startRec(String filePath, String fileName);
     public native int _stopRec();
     public native boolean _getRecState();
+    public native boolean isMute();
+    public native boolean isShowVideo();
 }

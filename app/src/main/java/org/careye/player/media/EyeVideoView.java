@@ -1189,4 +1189,18 @@ public class EyeVideoView extends FrameLayout implements MediaController.MediaPl
         }
         return false;
     }
+
+    public boolean getMuteState(){
+        if (mMediaPlayer != null) {
+            return mMediaPlayer.getMuteState();
+        }
+        return false;
+    }
+
+    public boolean getShowVideoState() {
+        if (mMediaPlayer != null) {
+            return mMediaPlayer.getShowVideoState();
+        }
+        return false;
+    }
 }

@@ -5,7 +5,7 @@ android {
     buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.careye.rtmp.careyeplayer"
-        minSdkVersion 19
+        minSdkVersion 17
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -34,5 +34,6 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:26.1.0'
 //    compile project(':libcareyeplayer')
     implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'
+    implementation 'com.android.support:support-v4:26.1.0'
+    implementation 'com.roughike:bottom-bar:2.3.1'
 }
-

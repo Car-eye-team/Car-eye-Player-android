@@ -6,4 +6,6 @@
     <color name="colorAccent">#D9533D</color><!--D9533D    ff4081 -->
 
     <color name="black_overlay">#66000000</color>
+
+    <color name="color_no_select">#88000000</color>
 </resources>

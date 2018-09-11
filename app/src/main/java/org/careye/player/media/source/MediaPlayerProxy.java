@@ -349,4 +349,15 @@ public class MediaPlayerProxy implements IMediaPlayer {
     public boolean getRecState() {
         return mBackEndMediaPlayer.getRecState();
     }
+
+    @Override
+    public boolean getMuteState() {
+        return mBackEndMediaPlayer.getMuteState();
+    }
+
+    @Override
+    public boolean getShowVideoState() {
+        return mBackEndMediaPlayer.getShowVideoState();
+    }
+
 }

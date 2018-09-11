@@ -1,0 +1,14 @@
+<tabs>
+    <!--<tab-->
+        <!--id="@+id/tab_local"-->
+        <!--icon="@drawable/ic_local"-->
+        <!--title="Local" />-->
+    <tab
+        id="@+id/tab_live"
+        icon="@drawable/ic_live"
+        title="Live" />
+    <!--<tab-->
+        <!--id="@+id/tab_yun"-->
+        <!--icon="@drawable/ic_yun"-->
+        <!--title="Yun" />-->
+</tabs>
