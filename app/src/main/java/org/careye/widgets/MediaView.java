@@ -9,7 +9,9 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,6 +22,8 @@ import com.careye.rtmp.careyeplayer.R;
 import org.careye.player.media.EyeVideoView;
 
 public class MediaView extends RelativeLayout implements View.OnClickListener {
+
+    private final String TAG = "MediaView";
 
     private RelativeLayout mRlMediaEdge;
     private EyeVideoView mEvvMedia;
@@ -99,6 +103,23 @@ public class MediaView extends RelativeLayout implements View.OnClickListener {
         mEvvMedia.enableVideo(isVideo);
     }
 
+    public int enableRec(boolean isRec, String filePath, String fileName) {
+        if (isRec) {
+            if (TextUtils.isEmpty(filePath) || TextUtils.isEmpty(fileName)) {
+                Log.e(TAG, "enableRec : filePath " + filePath + " : fileName " + fileName);
+                return -1;
+            }
+            mEvvMedia.startRecord(filePath, fileName);
+        } else {
+            mEvvMedia.stopRecord();
+        }
+        return 0;
+    }
+
+    public boolean getRecState() {
+        return mEvvMedia.getRecState();
+    }
+
     public void stop() {
         mEvvMedia.stopPlayback();
         mEvvMedia.release(true);
@@ -109,4 +130,5 @@ public class MediaView extends RelativeLayout implements View.OnClickListener {
         mEvvMedia.setVideoPath(url);
         mEvvMedia.start();
     }
+
 }

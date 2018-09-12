@@ -9,6 +9,8 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Environment;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +23,8 @@ import android.widget.Toast;
 import com.careye.rtmp.careyeplayer.R;
 
 import org.careye.widgets.MediaView;
+
+import static android.widget.Toast.LENGTH_LONG;
 
 public class LiveFragment extends Fragment implements View.OnClickListener {
 
@@ -152,7 +156,17 @@ public class LiveFragment extends Fragment implements View.OnClickListener {
      * @param mCurrPlayer   当前活动窗口
      */
     private void setRecEnable(MediaView mCurrPlayer) {
-
+        boolean isRec = mCurrPlayer.getRecState();
+        if (isRec) {
+            mCurrPlayer.enableRec(false, "", "");
+            Toast.makeText(getActivity(), "录制停止！", LENGTH_LONG).show();
+        } else {
+            String filePath= Environment.getExternalStorageDirectory().getAbsolutePath() + "/careye/video/";
+            String fileName =  SystemClock.uptimeMillis() + ".mp4";
+            mCurrPlayer.enableRec(true, filePath, fileName);
+            Toast.makeText(getActivity(), "录制开始！", LENGTH_LONG).show();
+        }
+        updateRecView(!isRec);
     }
 
     /**
@@ -161,12 +175,8 @@ public class LiveFragment extends Fragment implements View.OnClickListener {
      */
     private void setVideoEnable(MediaView mCurrPlayer) {
         boolean isShow = mCurrPlayer.getShowVideoState();
-        if (isShow) {
-            mIvVideo.setImageResource(R.drawable.ic_video_hide);
-        } else {
-            mIvVideo.setImageResource(R.drawable.ic_video_show);
-        }
         mCurrPlayer.enableVideo(!isShow);
+        updateVideoView(!isShow);
     }
 
     /**
@@ -175,12 +185,8 @@ public class LiveFragment extends Fragment implements View.OnClickListener {
      */
     private void setMuteEnable(MediaView mCurrPlayer) {
         boolean isMute = mCurrPlayer.getMuteState();
-        if (isMute) {
-            mIvVoice.setImageResource(R.drawable.ic_voice);
-        } else {
-            mIvVoice.setImageResource(R.drawable.ic_no_voice);
-        }
         mCurrPlayer.enableVolume(!isMute);
+        updateMuteView(!isMute);
     }
 
     private void release() {
@@ -195,19 +201,25 @@ public class LiveFragment extends Fragment implements View.OnClickListener {
 
         String url = mEtLiveUrl.getText().toString().trim();
         if (TextUtils.isEmpty(url)) {
-            Toast.makeText(getActivity(), "播放地址不能为空!", Toast.LENGTH_LONG);
+            Toast.makeText(getActivity(), "播放地址不能为空!", LENGTH_LONG);
             return;
         }
 
-        boolean isPlaying = mCurrPlayer.isPlaying();
+        boolean isPlaying = player.isPlaying();
         if (isPlaying) {
-            mIvPlay.setImageResource(R.drawable.ic_play);
             player.stop();
         } else {
-            mIvPlay.setImageResource(R.drawable.ic_pause);
             player.stop();
             player.play(url);
         }
+        updatePlayView(!isPlaying);
+
+        //音量状态
+        updateMuteView(player.getMuteState());
+        //视频显示状态
+        updateVideoView(player.getShowVideoState());
+        //更新录制状态
+        updateRecView(player.getRecState());
     }
 
     /**
@@ -220,29 +232,45 @@ public class LiveFragment extends Fragment implements View.OnClickListener {
         mCurrPlayer.setSelect(true);
 
         //播放状态
-        boolean isPlaying = mCurrPlayer.isPlaying();
+        updatePlayView(mCurrPlayer.isPlaying());
+        //音量状态
+        updateMuteView(mCurrPlayer.getMuteState());
+        //视频显示状态
+        updateVideoView(mCurrPlayer.getShowVideoState());
+        //更新录制状态
+        updateRecView(mCurrPlayer.getRecState());
+    }
+
+    public void updatePlayView(boolean isPlaying) {
         if (isPlaying) {
             mIvPlay.setImageResource(R.drawable.ic_pause);
         } else {
             mIvPlay.setImageResource(R.drawable.ic_play);
         }
+    }
 
-        //音量状态
-        boolean isMute = mCurrPlayer.getMuteState();
-        if (isMute) {
-            mIvVoice.setImageResource(R.drawable.ic_no_voice);
-        } else {
-            mIvVoice.setImageResource(R.drawable.ic_voice);
-        }
-
-        //视频显示状态
-        boolean isVideo = mCurrPlayer.getShowVideoState();
+    private void updateVideoView(boolean isVideo) {
         if (isVideo) {
             mIvVideo.setImageResource(R.drawable.ic_video_show);
         } else {
             mIvVideo.setImageResource(R.drawable.ic_video_hide);
         }
+    }
 
+    private void updateMuteView(boolean isMute) {
+        if (isMute) {
+            mIvVoice.setImageResource(R.drawable.ic_no_voice);
+        } else {
+            mIvVoice.setImageResource(R.drawable.ic_voice);
+        }
+    }
+
+    private void updateRecView(boolean isRec) {
+        if (isRec) {
+            mIvRec.setImageResource(R.drawable.ic_recording);
+        } else {
+            mIvRec.setImageResource(R.drawable.ic_record);
+        }
     }
 
     public interface OnFragmentInteractionListener {
