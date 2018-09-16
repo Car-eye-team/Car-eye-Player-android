@@ -3,6 +3,7 @@
 Car-eye-Player-android 是car-eye 开源团队开发的一个全功能播放器，支持多种音视频格式，支持多种流媒体传输协议，非常高效。
 
 
+![](https://github.com/Car-eye-team/Car-eye-pusher-android/blob/master/%E6%8E%A8%E6%B5%81/pusher-machine.png)
 
 
 car-eye 播放器系列
