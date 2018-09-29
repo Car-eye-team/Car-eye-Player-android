@@ -9,7 +9,7 @@ Car-eye-Player-android 是car-eye 开源团队开发的一个全功能播放器�
 
 运行效果如下：
 
-![](https://github.com/Car-eye-team/Car-eye-Player-android/blob/master/%E5%A4%9A%E9%80%9A%E9%81%93%E6%92%AD%E6%94%BE%E5%99%A8.png)
+![](https://github.com/Car-eye-team/Car-eye-Player-android/blob/master/Car-eye-player-android.png)
 
 
 car-eye 播放器系列
